@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/Entities/PokedexEntry.dart';
 
@@ -26,11 +27,21 @@ class _PokemonDetailState extends State<PokemonDetailScreen> {
             margin: EdgeInsets.only(top: 24, left: 40, right: 40),
             child: Image.network(pokemon.imageUrl()),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              pokemon.specie.capitalizedName(),
-              style: TextStyle(fontSize: 28),
+          GestureDetector(
+            onTap: () async {
+              final url = 'https://www.nu.com.mx';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                pokemon.specie.capitalizedName(),
+                style: TextStyle(fontSize: 28),
+              ),
             ),
           )
         ],
