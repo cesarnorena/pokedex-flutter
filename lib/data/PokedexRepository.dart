@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-import 'dart:convert';
 import './Entities/Pokedex.dart';
 
 class PokedexRepository {

@@ -16,16 +16,17 @@ class _PokemonDetailState extends State<PokemonDetailScreen> {
     PokedexEntry pokemon = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: _buildAppBar(
-        context,
-        pokemon.specie.capitalizedName(),
+      appBar: AppBar(
+        title: Text(
+          pokemon.specie.capitalizedName,
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: EdgeInsets.only(top: 24, left: 40, right: 40),
-            child: Image.network(pokemon.imageUrl()),
+            child: Image.network(pokemon.imageUrl),
           ),
           GestureDetector(
             onTap: () async {
@@ -39,19 +40,13 @@ class _PokemonDetailState extends State<PokemonDetailScreen> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
-                pokemon.specie.capitalizedName(),
+                pokemon.specie.capitalizedName,
                 style: TextStyle(fontSize: 28),
               ),
             ),
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context, String title) {
-    return AppBar(
-      title: Text(title),
     );
   }
 }

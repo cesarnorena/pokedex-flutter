@@ -22,10 +22,7 @@ class AppLocalizations {
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   @override
-  bool isSupported(Locale locale) => [
-        'en',
-        'es',
-      ].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'es'].contains(locale.languageCode);
 
   @override
   Future<AppLocalizations> load(Locale locale) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'resources/AppLocalizations.dart';
-import 'screens/PokemonListScreen.dart';
+import 'localization/AppLocalizations.dart';
 import 'screens/PokemonDetailScreen.dart';
+import 'screens/PokemonListScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
 
   final _appTheme = ThemeData(
     primarySwatch: Colors.red,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 
   @override
