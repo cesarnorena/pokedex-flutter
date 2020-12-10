@@ -1,3 +1,1 @@
-# pokedex_flutter
-
-A new Flutter project.
+# Flutter Pokedex App
