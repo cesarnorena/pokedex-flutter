@@ -9,7 +9,8 @@ class PokedexRepository {
 
   Future<Pokedex> getPokedex(int id) async {
     final client = http.Client();
-    final response = await client.get("$URL/pokedex/$id");
+    final url = Uri.parse("$URL/pokedex/$id");
+    final response = await client.get(url);
     client.close();
     return _parsePokedex(response.body);
   }
