@@ -8,15 +8,15 @@ class AppLocalizations {
 
   static final LocalizationsDelegate delegate = AppLocalizationsDelegate();
 
-  static AppLocalizations of(BuildContext context) {
+  static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static Map<String, Map<String, String>> _localizedValues =
       LocalizedValues.VALUES;
 
-  String get appTitle {
-    return _localizedValues[locale.languageCode]['app_title'];
+  String? get appTitle {
+    return _localizedValues[locale.languageCode]?['app_title'];
   }
 }
 

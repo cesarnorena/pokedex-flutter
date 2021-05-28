@@ -9,9 +9,7 @@ part of 'PokedexEntry.dart';
 PokedexEntry _$PokedexEntryFromJson(Map<String, dynamic> json) {
   return PokedexEntry(
     json['entry_number'] as int,
-    json['pokemon_species'] == null
-        ? null
-        : Specie.fromJson(json['pokemon_species'] as Map<String, dynamic>),
+    Specie.fromJson(json['pokemon_species'] as Map<String, dynamic>),
   );
 }
 

@@ -13,7 +13,8 @@ class PokemonDetailScreen extends StatefulWidget {
 class _PokemonDetailState extends State<PokemonDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    PokedexEntry pokemon = ModalRoute.of(context).settings.arguments;
+    PokedexEntry pokemon =
+        ModalRoute.of(context)?.settings.arguments as PokedexEntry;
 
     return Scaffold(
       appBar: AppBar(

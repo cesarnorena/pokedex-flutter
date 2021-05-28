@@ -8,10 +8,9 @@ part of 'Pokedex.dart';
 
 Pokedex _$PokedexFromJson(Map<String, dynamic> json) {
   return Pokedex(
-    (json['pokemon_entries'] as List)
-        ?.map((e) =>
-            e == null ? null : PokedexEntry.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['pokemon_entries'] as List<dynamic>)
+        .map((e) => PokedexEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
