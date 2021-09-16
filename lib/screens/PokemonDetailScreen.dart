@@ -27,7 +27,14 @@ class _PokemonDetailState extends State<PokemonDetailScreen> {
         children: [
           Container(
             margin: EdgeInsets.only(top: 24, left: 40, right: 40),
-            child: Image.network(pokemon.imageUrl),
+            child: Image.network(
+              pokemon.imageUrl,
+              errorBuilder: (ctx, _, __) {
+                return Container(
+                  child: Icon(Icons.image_not_supported),
+                );
+              },
+            ),
           ),
           GestureDetector(
             onTap: () async {

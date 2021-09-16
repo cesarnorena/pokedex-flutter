@@ -10,7 +10,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   static const route = '/';
 
-  final routes = {
+  final _routes = {
     MyApp.route: (ctx) => PokemonListScreen(),
     PokemonListScreen.route: (ctx) => PokemonListScreen(),
     PokemonDetailScreen.route: (ctx) => PokemonDetailScreen(),
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: _appTheme,
       initialRoute: MyApp.route,
-      routes: routes,
+      routes: _routes,
       supportedLocales: _supportedLocales,
       localizationsDelegates: _localizationDelegates,
     );

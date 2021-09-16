@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
@@ -40,6 +39,13 @@ class _PokemonListItemWidget extends StatelessWidget {
               pokemon.imageUrl,
               width: 56,
               height: 56,
+              errorBuilder: (ctx, _, __) {
+                return Container(
+                  child: Icon(Icons.image_not_supported),
+                  width: 56,
+                  height: 56,
+                );
+              },
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16),

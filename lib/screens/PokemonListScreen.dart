@@ -30,7 +30,7 @@ class _PokemonListState extends State<PokemonListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle!),
+        title: Text(AppLocalizations.of(context).appTitle!),
       ),
       body: PokemonListWidget(_pokemonList, _onItemClick),
     );

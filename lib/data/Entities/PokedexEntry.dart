@@ -21,7 +21,7 @@ class PokedexEntry {
   }
 
   String get imageUrl =>
-      "http://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedId.png";
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedId.png";
 
   factory PokedexEntry.fromJson(Map<String, dynamic> json) =>
       _$PokedexEntryFromJson(json);
