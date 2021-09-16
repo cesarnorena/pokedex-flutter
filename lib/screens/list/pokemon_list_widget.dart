@@ -3,11 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
 
 class PokemonListWidget extends StatelessWidget {
-  PokemonListWidget(this._pokemonList, this._onItemClick);
-
   final List<PokedexEntry> _pokemonList;
-
   final void Function(int index) _onItemClick;
+
+  PokemonListWidget(this._pokemonList, this._onItemClick);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +23,9 @@ class PokemonListWidget extends StatelessWidget {
 }
 
 class _PokemonListItemWidget extends StatelessWidget {
-  const _PokemonListItemWidget(this.pokemon);
-
   final PokedexEntry pokemon;
+
+  const _PokemonListItemWidget(this.pokemon);
 
   @override
   Widget build(BuildContext context) {

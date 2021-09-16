@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'localization/AppLocalizations.dart';
-import 'screens/PokemonDetailScreen.dart';
-import 'screens/PokemonListScreen.dart';
+import 'screens/details/PokemonDetailScreen.dart';
+import 'screens/list/PokemonListScreen.dart';
 
 void main() => runApp(MyApp());
 

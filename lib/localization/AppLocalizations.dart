@@ -15,8 +15,8 @@ class AppLocalizations {
   static Map<String, Map<String, String>> _localizedValues =
       LocalizedValues.VALUES;
 
-  String? get appTitle {
-    return _localizedValues[locale.languageCode]?['app_title'];
+  String get appTitle {
+    return _localizedValues[locale.languageCode]!['app_title']!;
   }
 }
 

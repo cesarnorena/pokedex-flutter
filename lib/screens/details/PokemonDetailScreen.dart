@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data/Entities/PokedexEntry.dart';
+import '../../data/Entities/PokedexEntry.dart';
 
 class PokemonDetailScreen extends StatefulWidget {
   static final route = '/detail';
