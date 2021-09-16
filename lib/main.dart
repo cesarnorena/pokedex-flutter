@@ -8,10 +8,7 @@ import 'screens/list/PokemonListScreen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  static const route = '/';
-
   final _routes = {
-    MyApp.route: (ctx) => PokemonListScreen(),
     PokemonListScreen.route: (ctx) => PokemonListScreen(),
     PokemonDetailScreen.route: (ctx) => PokemonDetailScreen(),
   };
@@ -28,16 +25,13 @@ class MyApp extends StatelessWidget {
     GlobalCupertinoLocalizations.delegate,
   ];
 
-  final _appTheme = ThemeData(
-    primarySwatch: Colors.red,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-  );
+  final _appTheme = ThemeData(primarySwatch: Colors.red);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: _appTheme,
-      initialRoute: MyApp.route,
+      initialRoute: PokemonListScreen.route,
       routes: _routes,
       supportedLocales: _supportedLocales,
       localizationsDelegates: _localizationDelegates,

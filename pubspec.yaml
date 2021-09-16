@@ -12,8 +12,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   http: ^0.13.3
-  json_serializable: ^4.1.4
-  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:

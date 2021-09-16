@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/Entities/PokedexEntry.dart';
 
-class PokemonDetailScreen extends StatefulWidget {
+class PokemonDetailScreen extends StatelessWidget {
   static final route = '/detail';
 
-  @override
-  State createState() => _PokemonDetailState();
-}
-
-class _PokemonDetailState extends State<PokemonDetailScreen> {
   @override
   Widget build(BuildContext context) {
     PokedexEntry pokemon =
@@ -36,21 +30,11 @@ class _PokemonDetailState extends State<PokemonDetailScreen> {
               },
             ),
           ),
-          GestureDetector(
-            onTap: () async {
-              final url = 'https://www.nu.com.mx';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'Could not launch $url';
-              }
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                pokemon.specie.capitalizedName,
-                style: TextStyle(fontSize: 28),
-              ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24),
+            child: Text(
+              pokemon.specie.capitalizedName,
+              style: TextStyle(fontSize: 28),
             ),
           )
         ],
