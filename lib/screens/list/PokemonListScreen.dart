@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import '../details/PokemonDetailScreen.dart';
-import '../../data/Entities/PokedexEntry.dart';
-import '../../data/PokedexRepository.dart';
-import '../../localization/AppLocalizations.dart';
-import 'pokemon_list_widget.dart';
+import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
+import 'package:pokedex_flutter/data/PokedexRepository.dart';
+import 'package:pokedex_flutter/localization/AppLocalizations.dart';
+import 'package:pokedex_flutter/screens/details/PokemonDetailScreen.dart';
+import 'package:pokedex_flutter/screens/list/pokemon_list_widget.dart';
 
 class PokemonListScreen extends StatelessWidget {
   static const route = '/list';
