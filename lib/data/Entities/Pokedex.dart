@@ -1,16 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
 
-import 'PokedexEntry.dart';
-
-part 'Pokedex.g.dart';
-
-@JsonSerializable()
 class Pokedex {
-  Pokedex(this.entries);
+  final List<PokedexEntry> entries;
 
-  @JsonKey(name: 'pokemon_entries')
-  List<PokedexEntry> entries;
+  Pokedex({required this.entries});
 
-  factory Pokedex.fromJson(Map<String, dynamic> json) =>
-      _$PokedexFromJson(json);
+  factory Pokedex.fromJson(Map<String, dynamic> json) {
+    return Pokedex(
+      entries: (json['pokemon_entries'] as List<dynamic>)
+          .map((e) => PokedexEntry.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }

@@ -1,18 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:pokedex_flutter/data/Entities/Specie.dart';
 
-import 'Specie.dart';
-
-part 'PokedexEntry.g.dart';
-
-@JsonSerializable()
 class PokedexEntry {
-  PokedexEntry(this.id, this.specie);
+  final int id;
+  final Specie specie;
 
-  @JsonKey(name: 'entry_number')
-  int id;
-
-  @JsonKey(name: 'pokemon_species')
-  Specie specie;
+  PokedexEntry({
+    required this.id,
+    required this.specie,
+  });
 
   String get formattedId {
     if (id < 10) return "00$id";
@@ -23,6 +18,12 @@ class PokedexEntry {
   String get imageUrl =>
       "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedId.png";
 
-  factory PokedexEntry.fromJson(Map<String, dynamic> json) =>
-      _$PokedexEntryFromJson(json);
+  factory PokedexEntry.fromJson(Map<String, dynamic> json) {
+    return PokedexEntry(
+      id: json['entry_number'] as int,
+      specie: Specie.fromJson(
+        json['pokemon_species'] as Map<String, dynamic>,
+      ),
+    );
+  }
 }

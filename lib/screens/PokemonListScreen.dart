@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import './PokemonDetailScreen.dart';
 import '../data/Entities/PokedexEntry.dart';
@@ -10,7 +11,9 @@ class PokemonListScreen extends StatefulWidget {
   static const route = '/list';
 
   @override
-  State createState() => _PokemonListState(PokedexRepository());
+  State createState() => _PokemonListState(
+        PokedexRepository(http: http.Client()),
+      );
 }
 
 class _PokemonListState extends State<PokemonListScreen> {
@@ -38,7 +41,7 @@ class _PokemonListState extends State<PokemonListScreen> {
 
   _fetchData() async {
     try {
-      final response = await _repository.getPokedex(1);
+      final response = await _repository.fetch(1);
       final list = response.entries;
 
       setState(() {
