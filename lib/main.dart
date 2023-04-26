@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'localization/AppLocalizations.dart';
 import 'screens/details/PokemonDetailScreen.dart';
 import 'screens/list/PokemonListScreen.dart';
 
@@ -13,19 +12,9 @@ class MyApp extends StatelessWidget {
     PokemonDetailScreen.route: (ctx) => PokemonDetailScreen(),
   };
 
-  final _supportedLocales = [
-    const Locale("en"),
-    const Locale("es"),
-  ];
-
-  final _localizationDelegates = [
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ];
-
   final _appTheme = ThemeData(primarySwatch: Colors.red);
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +22,8 @@ class MyApp extends StatelessWidget {
       theme: _appTheme,
       initialRoute: PokemonListScreen.route,
       routes: _routes,
-      supportedLocales: _supportedLocales,
-      localizationsDelegates: _localizationDelegates,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

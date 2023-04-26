@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
 
 class PokemonListWidget extends StatelessWidget {
   final List<PokedexEntry> _pokemonList;
   final void Function(int index) _onItemClick;
 
-  PokemonListWidget(this._pokemonList, this._onItemClick);
+  const PokemonListWidget(
+    this._pokemonList,
+    this._onItemClick, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +42,18 @@ class _PokemonListItemWidget extends StatelessWidget {
               width: 56,
               height: 56,
               errorBuilder: (ctx, _, __) {
-                return Container(
-                  child: Icon(Icons.image_not_supported),
+                return const SizedBox(
                   width: 56,
                   height: 56,
+                  child: Icon(Icons.image_not_supported),
                 );
               },
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 pokemon.specie.capitalizedName,
-                style: TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 22),
               ),
             )
           ],

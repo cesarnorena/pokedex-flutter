@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
 import 'package:pokedex_flutter/data/PokedexRepository.dart';
-import 'package:pokedex_flutter/localization/AppLocalizations.dart';
 import 'package:pokedex_flutter/screens/details/PokemonDetailScreen.dart';
 import 'package:pokedex_flutter/screens/list/pokemon_list_widget.dart';
 
 class PokemonListScreen extends StatelessWidget {
   static const route = '/list';
+
+  const PokemonListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class PokemonListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).appTitle),
+        title: Text(AppLocalizations.of(context)!.app_title),
       ),
       body: FutureBuilder<List<PokedexEntry>>(
         future: repository.fetch(1).then((e) => e.entries),
