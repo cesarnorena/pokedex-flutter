@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
+import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
 
 class PokemonListWidget extends StatelessWidget {
   final List<PokedexEntry> _pokemonList;
@@ -34,7 +34,7 @@ class _PokemonListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: <Widget>[
             Image.network(

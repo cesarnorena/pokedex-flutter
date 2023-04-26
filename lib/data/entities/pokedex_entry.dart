@@ -1,4 +1,4 @@
-import 'package:pokedex_flutter/data/Entities/Specie.dart';
+import 'package:pokedex_flutter/data/Entities/specie.dart';
 
 class PokedexEntry {
   final int id;

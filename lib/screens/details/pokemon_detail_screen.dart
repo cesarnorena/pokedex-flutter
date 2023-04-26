@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter/data/Entities/PokedexEntry.dart';
+import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
 
 class PokemonDetailScreen extends StatelessWidget {
-  static final route = '/detail';
+  static const route = '/detail';
+
+  const PokemonDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,21 +21,19 @@ class PokemonDetailScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(top: 24, left: 40, right: 40),
+            margin: const EdgeInsets.only(top: 24, left: 40, right: 40),
             child: Image.network(
               pokemon.imageUrl,
               errorBuilder: (ctx, _, __) {
-                return Container(
-                  child: Icon(Icons.image_not_supported),
-                );
+                return const Icon(Icons.image_not_supported);
               },
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
+            margin: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               pokemon.specie.capitalizedName,
-              style: TextStyle(fontSize: 28),
+              style: const TextStyle(fontSize: 28),
             ),
           )
         ],
