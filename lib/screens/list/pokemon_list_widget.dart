@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
+import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 
 class PokemonListWidget extends StatelessWidget {
-  final List<PokedexEntry> _pokemonList;
-  final void Function(int index) _onItemClick;
+  final List<PokedexEntry> entries;
+  final void Function(int index) onItemClick;
 
-  const PokemonListWidget(
-    this._pokemonList,
-    this._onItemClick, {
+  const PokemonListWidget({
     super.key,
+    required this.entries,
+    required this.onItemClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: _pokemonList.length,
-      itemBuilder: (ctx, idx) {
+      itemCount: entries.length,
+      itemBuilder: (context, index) {
         return InkWell(
-          onTap: () => _onItemClick(idx),
-          child: _PokemonListItemWidget(_pokemonList[idx]),
+          onTap: () => onItemClick(index),
+          child: _PokemonListItemWidget(entries[index]),
         );
       },
     );
@@ -32,30 +32,41 @@ class _PokemonListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData(:textTheme) = Theme.of(context);
+
     return Card(
-      child: Container(
-        padding: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Row(
-          children: <Widget>[
+          children: [
             Image.network(
               pokemon.imageUrl,
-              width: 56,
-              height: 56,
-              errorBuilder: (ctx, _, __) {
+              width: 56.0,
+              height: 56.0,
+              errorBuilder: (_, __, ___) {
                 return const SizedBox(
-                  width: 56,
-                  height: 56,
+                  width: 56.0,
+                  height: 56.0,
                   child: Icon(Icons.image_not_supported),
                 );
               },
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                pokemon.specie.capitalizedName,
-                style: const TextStyle(fontSize: 22),
-              ),
-            )
+            const SizedBox(width: 16.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  pokemon.formattedId,
+                  style: textTheme.titleSmall,
+                ),
+                Text(
+                  pokemon.specie.capitalizedName,
+                  style: textTheme.titleLarge,
+                ),
+              ],
+            ),
+            const Spacer(),
+            const Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

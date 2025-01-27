@@ -1,4 +1,4 @@
-import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
+import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 
 class Pokedex {
   final List<PokedexEntry> entries;

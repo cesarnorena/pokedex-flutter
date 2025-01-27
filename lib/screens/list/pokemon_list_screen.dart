@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:http/http.dart' as http;
-import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
-import 'package:pokedex_flutter/data/pokedex_repository.dart';
+import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 import 'package:pokedex_flutter/screens/details/pokemon_detail_screen.dart';
+import 'package:pokedex_flutter/screens/list/pokemon_list_controller.dart';
 import 'package:pokedex_flutter/screens/list/pokemon_list_widget.dart';
+import 'package:provider/provider.dart';
 
 class PokemonListScreen extends StatelessWidget {
-  static const route = '/list';
+  static const route = 'pokemons/list';
 
   const PokemonListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final repository = PokedexRepository(http: http.Client());
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.app_title),
+        title: Text(l10n.app_title),
       ),
-      body: FutureBuilder<List<PokedexEntry>>(
-        future: repository.fetch(1).then((e) => e.entries),
-        builder: (context, snapshot) {
-          final entries = snapshot.data ?? [];
+      body: SafeArea(
+        child: ValueListenableBuilder(
+          valueListenable: context.read<PokemonListController>(),
+          builder: (context, value, _) {
+            final entries = value.entries ?? [];
 
-          return PokemonListWidget(
-            entries,
-            (index) => _onItemClick(context, entries[index]),
-          );
-        },
+            return PokemonListWidget(
+              entries: entries,
+              onItemClick: (index) => _onItemClick(context, entries[index]),
+            );
+          },
+        ),
       ),
     );
   }

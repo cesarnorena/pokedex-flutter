@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter/data/Entities/pokedex_entry.dart';
+import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 
 class PokemonDetailScreen extends StatelessWidget {
-  static const route = '/detail';
+  static const route = 'pokemons/detail';
 
   const PokemonDetailScreen({super.key});
 
