@@ -12,12 +12,10 @@ A Flutter Pokédex app: browses Pokémon fetched from PokéAPI, shows Pokémon d
 - Run the app: `flutter run`
 - Analyze/lint: `flutter analyze`
 - Run all tests: `flutter test`
-- Run a single test file: `flutter test test/widget_test.dart`
+- Run a single test file: `flutter test test/data/entities/pokedex_entry_test.dart`
 - Regenerate localizations (after editing `lib/l10n/app_en.arb`): `flutter gen-l10n`
 
 iOS/macOS builds use CocoaPods (`ios/Podfile`, `macos/Podfile`); run `pod install` in the respective platform directory if native dependencies change.
-
-Note: `test/widget_test.dart` is still the default Flutter counter-app boilerplate and does not exercise this app's actual widget tree — treat it as a placeholder, not a real regression test, until it's rewritten.
 
 ## Architecture
 
@@ -29,7 +27,7 @@ Each feature under `lib/screens/<feature>/` is split into three parts, wired tog
 - **`*_controller.dart`** — a `ValueNotifier<State>` holding an immutable state class for the screen (e.g. `PokemonListState`) and the async logic that mutates it (e.g. `fetch()`). Screens read it via `context.read<Controller>()` and rebuild with `ValueListenableBuilder`.
 - **`*_screen.dart`** — the `StatelessWidget` UI, dumb with respect to data fetching; delegates interaction callbacks upward (e.g. `onItemClick`) and navigation via `Navigator.pushNamed`.
 
-`PokemonListScreen` and `PokemonDetailScreen` follow this pattern fully. `RecognitionScreen`/`RecognitionProvider` in `lib/screens/recognition/recognition_screen.dart` follow the same shape but currently live in one file, and `Application` (`lib/application.dart`) points `initialRoute` directly at `RecognitionScreen.route` rather than through the list flow — check `initialRoute` there before assuming the list screen is the app's entry point.
+`PokemonListScreen` and `PokemonDetailScreen` follow this pattern fully; `Application` (`lib/application.dart`) sets `initialRoute` to `PokemonListScreen.route`.
 
 ### Data layer
 
@@ -44,7 +42,7 @@ Routes are named strings declared as static `route` constants on each screen cla
 
 ### Localization
 
-Uses Flutter's built-in `gen-l10n` (config in `l10n.yaml`, ARB source at `lib/l10n/app_en.arb`, generated code at `flutter_gen/gen_l10n/app_localizations.dart`). Access strings via `AppLocalizations.of(context)!`.
+Uses Flutter's built-in `gen-l10n` (config in `l10n.yaml`, ARB source at `lib/l10n/app_en.arb`, generated code at `lib/l10n/app_localizations.dart`). Access strings via `AppLocalizations.of(context)!`.
 
 ### Theming
 
