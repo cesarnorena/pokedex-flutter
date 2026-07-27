@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/core/design_system/spacing.dart';
 import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 
 class PokemonListWidget extends StatelessWidget {
@@ -36,7 +37,7 @@ class _PokemonListItemWidget extends StatelessWidget {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Row(
           children: [
             Image.network(
@@ -51,7 +52,7 @@ class _PokemonListItemWidget extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(width: 16.0),
+            const SizedBox(width: AppSpacing.md),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

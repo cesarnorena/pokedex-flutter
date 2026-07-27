@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokedex_flutter/data/network/api_client.dart';
 import 'package:pokedex_flutter/data/pokedex_repository.dart';
 import 'package:pokedex_flutter/screens/list/pokemon_list_controller.dart';
 import 'package:pokedex_flutter/screens/list/pokemon_list_screen.dart';
@@ -10,8 +11,11 @@ class PokemonListProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final httpClient = http.Client();
-    final repository = DefaultPokedexRepository(http: httpClient);
+    final apiClient = HttpApiClient(
+      http: http.Client(),
+      baseUrl: pokeApiBaseUrl,
+    );
+    final repository = DefaultPokedexRepository(client: apiClient);
 
     return Provider(
       create: (_) => PokemonListController(

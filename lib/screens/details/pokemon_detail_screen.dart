@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/core/design_system/spacing.dart';
 import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 
 class PokemonDetailScreen extends StatelessWidget {
@@ -28,12 +29,12 @@ class PokemonDetailScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
+            horizontal: AppSpacing.md,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16.0),
+              const SizedBox(height: AppSpacing.md),
               Center(
                 child: Image.network(
                   width: 224.0,
@@ -44,12 +45,12 @@ class PokemonDetailScreen extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: AppSpacing.md),
               Text(
                 pokemon.formattedId,
                 style: textTheme.titleLarge,
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: AppSpacing.sm),
               Text(
                 pokemon.specie.capitalizedName,
                 style: textTheme.headlineMedium,
