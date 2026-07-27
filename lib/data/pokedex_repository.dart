@@ -15,6 +15,9 @@ class DefaultPokedexRepository implements PokedexRepository {
   @override
   Future<Pokedex> fetch(int id) async {
     final json = await _client.get("/pokedex/$id");
-    return Pokedex.fromJson(json as Map<String, dynamic>);
+    if (json is! Map<String, dynamic>) {
+      throw const ApiDecodeException();
+    }
+    return Pokedex.fromJson(json);
   }
 }

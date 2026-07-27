@@ -44,7 +44,7 @@ class HttpApiClient implements ApiClient {
 
   @override
   Future<dynamic> get(String path) async {
-    final url = Uri.parse('$baseUrl$path');
+    final url = _buildUri(path);
 
     final http.Response response;
     try {
@@ -65,4 +65,11 @@ class HttpApiClient implements ApiClient {
   }
 
   void close() => _http.close();
+
+  Uri _buildUri(String path) {
+    final normalizedBase =
+        baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl;
+    final normalizedPath = path.startsWith('/') ? path : '/$path';
+    return Uri.parse('$normalizedBase$normalizedPath');
+  }
 }

@@ -22,6 +22,28 @@ void main() {
       expect(result, {'name': 'pikachu'});
     });
 
+    test('get() normalizes slashes between baseUrl and path', () async {
+      final requestedUris = <Uri>[];
+      Future<HttpApiClient> clientWith(String baseUrl) async {
+        return HttpApiClient(
+          http: MockClient((request) async {
+            requestedUris.add(request.url);
+            return http.Response('{}', 200);
+          }),
+          baseUrl: baseUrl,
+        );
+      }
+
+      await (await clientWith('https://example.com/api')).get('/pokemon/25');
+      await (await clientWith('https://example.com/api/')).get('/pokemon/25');
+      await (await clientWith('https://example.com/api')).get('pokemon/25');
+      await (await clientWith('https://example.com/api/')).get('pokemon/25');
+
+      for (final uri in requestedUris) {
+        expect(uri, Uri.parse('https://example.com/api/pokemon/25'));
+      }
+    });
+
     test('get() throws ApiStatusException for a non-2xx response', () async {
       final client = HttpApiClient(
         http: MockClient((request) async => http.Response('Not Found', 404)),

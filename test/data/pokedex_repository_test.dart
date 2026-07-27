@@ -38,6 +38,17 @@ void main() {
       expect(pokedex.entries.single.specie.name, 'bulbasaur');
     });
 
+    test('fetch() throws ApiDecodeException when the response is not a JSON object',
+        () async {
+      final client = _FakeApiClient(response: ['not', 'an', 'object']);
+      final repository = DefaultPokedexRepository(client: client);
+
+      expect(
+        () => repository.fetch(1),
+        throwsA(isA<ApiDecodeException>()),
+      );
+    });
+
     test('fetch() propagates exceptions thrown by the client', () async {
       final client = _FakeApiClient(error: ApiStatusException(404));
       final repository = DefaultPokedexRepository(client: client);

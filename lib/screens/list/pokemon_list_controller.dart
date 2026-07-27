@@ -16,6 +16,7 @@ class PokemonListState {
 
 class PokemonListController extends ValueNotifier<PokemonListState> {
   final PokedexRepository _repository;
+  bool _disposed = false;
 
   PokemonListController({
     required PokedexRepository repository,
@@ -27,9 +28,17 @@ class PokemonListController extends ValueNotifier<PokemonListState> {
 
     try {
       final response = await _repository.fetch(1);
+      if (_disposed) return;
       value = PokemonListState(entries: response.entries);
     } catch (error) {
+      if (_disposed) return;
       value = PokemonListState(error: error);
     }
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }
