@@ -14,19 +14,18 @@ class PokemonListProvider extends StatefulWidget {
 }
 
 class _PokemonListProviderState extends State<PokemonListProvider> {
-  late final http.Client _httpClient;
+  late final HttpApiClient _apiClient;
   late final PokemonListController _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _httpClient = http.Client();
-    final apiClient = HttpApiClient(
-      http: _httpClient,
+    _apiClient = HttpApiClient(
+      http: http.Client(),
       baseUrl: pokeApiBaseUrl,
     );
-    final repository = DefaultPokedexRepository(client: apiClient);
+    final repository = DefaultPokedexRepository(client: _apiClient);
 
     _controller = PokemonListController(repository: repository)..fetch();
   }
@@ -34,13 +33,13 @@ class _PokemonListProviderState extends State<PokemonListProvider> {
   @override
   void dispose() {
     _controller.dispose();
-    _httpClient.close();
+    _apiClient.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Provider.value(
+    return ChangeNotifierProvider.value(
       value: _controller,
       child: const PokemonListScreen(),
     );

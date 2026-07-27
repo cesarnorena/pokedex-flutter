@@ -31,6 +31,10 @@ class PokemonListScreen extends StatelessWidget {
               );
             }
 
+            if (value.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
             final entries = value.entries ?? [];
 
             return PokemonListWidget(
