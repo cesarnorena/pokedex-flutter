@@ -23,7 +23,7 @@ iOS/macOS builds use CocoaPods (`ios/Podfile`, `macos/Podfile`); run `pod instal
 
 Each feature under `lib/screens/<feature>/` is split into three parts, wired together with the `provider` package:
 
-- **`*_provider.dart`** — a `StatelessWidget` that constructs dependencies (HTTP client, repository, `Interpreter`, etc.), wraps them in a `Provider`/`ValueNotifier`, and renders the corresponding `*_screen.dart`. This is the composition root for that screen — dependencies are built here, not injected globally.
+- **`*_provider.dart`** — constructs dependencies (HTTP client, repository, `Interpreter`, etc.), wraps them in a `Provider`/`ChangeNotifierProvider`, and renders the corresponding `*_screen.dart`. This is the composition root for that screen — dependencies are built here, not injected globally. Usually a `StatelessWidget`; when the provider owns a resource that must be closed (e.g. `PokemonListProvider`'s `HttpApiClient`), it's a `StatefulWidget` instead, building dependencies in `initState()` and releasing them in `dispose()`.
 - **`*_controller.dart`** — a `ValueNotifier<State>` holding an immutable state class for the screen (e.g. `PokemonListState`) and the async logic that mutates it (e.g. `fetch()`). Screens read it via `context.read<Controller>()` and rebuild with `ValueListenableBuilder`.
 - **`*_screen.dart`** — the `StatelessWidget` UI, dumb with respect to data fetching; delegates interaction callbacks upward (e.g. `onItemClick`) and navigation via `Navigator.pushNamed`.
 
