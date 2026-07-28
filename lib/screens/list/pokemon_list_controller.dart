@@ -5,15 +5,18 @@ import 'package:pokedex_flutter/data/pokedex_repository.dart';
 class PokemonListState {
   final List<PokedexEntry>? entries;
   final bool isLoading;
+  final Object? error;
 
   const PokemonListState({
     this.entries,
     this.isLoading = false,
+    this.error,
   });
 }
 
 class PokemonListController extends ValueNotifier<PokemonListState> {
   final PokedexRepository _repository;
+  bool _disposed = false;
 
   PokemonListController({
     required PokedexRepository repository,
@@ -23,8 +26,19 @@ class PokemonListController extends ValueNotifier<PokemonListState> {
   Future<void> fetch() async {
     value = const PokemonListState(isLoading: true);
 
-    final response = await _repository.fetch(1);
+    try {
+      final response = await _repository.fetch(1);
+      if (_disposed) return;
+      value = PokemonListState(entries: response.entries);
+    } catch (error) {
+      if (_disposed) return;
+      value = PokemonListState(error: error);
+    }
+  }
 
-    value = PokemonListState(entries: response.entries);
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }

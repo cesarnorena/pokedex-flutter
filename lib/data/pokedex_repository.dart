@@ -1,22 +1,23 @@
-import 'dart:convert';
-
-import 'package:http/http.dart';
 import 'package:pokedex_flutter/data/entities/pokedex.dart';
+import 'package:pokedex_flutter/data/network/api_client.dart';
+
+const pokeApiBaseUrl = "https://pokeapi.co/api/v2";
 
 abstract interface class PokedexRepository {
   Future<Pokedex> fetch(int id);
 }
 
 class DefaultPokedexRepository implements PokedexRepository {
-  static const _baseUrl = "https://pokeapi.co/api/v2";
-  final Client _http;
+  final ApiClient _client;
 
-  DefaultPokedexRepository({required Client http}) : _http = http;
+  DefaultPokedexRepository({required ApiClient client}) : _client = client;
 
   @override
   Future<Pokedex> fetch(int id) async {
-    final url = Uri.parse("$_baseUrl/pokedex/$id");
-    final response = await _http.get(url);
-    return Pokedex.fromJson(jsonDecode(response.body));
+    final json = await _client.get("/pokedex/$id");
+    if (json is! Map<String, dynamic>) {
+      throw const ApiDecodeException();
+    }
+    return Pokedex.fromJson(json);
   }
 }

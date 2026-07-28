@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pokedex_flutter/core/design_system/spacing.dart';
+import 'package:pokedex_flutter/l10n/app_localizations.dart';
 import 'package:pokedex_flutter/data/entities/pokedex_entry.dart';
 import 'package:pokedex_flutter/screens/details/pokemon_detail_screen.dart';
 import 'package:pokedex_flutter/screens/list/pokemon_list_controller.dart';
@@ -23,6 +24,17 @@ class PokemonListScreen extends StatelessWidget {
         child: ValueListenableBuilder(
           valueListenable: context.read<PokemonListController>(),
           builder: (context, value, _) {
+            if (value.error != null) {
+              return _PokemonListErrorWidget(
+                message: l10n.list_error_message,
+                onRetry: () => context.read<PokemonListController>().fetch(),
+              );
+            }
+
+            if (value.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
             final entries = value.entries ?? [];
 
             return PokemonListWidget(
@@ -40,6 +52,38 @@ class PokemonListScreen extends StatelessWidget {
       context,
       PokemonDetailScreen.route,
       arguments: entry,
+    );
+  }
+}
+
+class _PokemonListErrorWidget extends StatelessWidget {
+  final String message;
+  final VoidCallback onRetry;
+
+  const _PokemonListErrorWidget({
+    required this.message,
+    required this.onRetry,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message, textAlign: TextAlign.center),
+            const SizedBox(height: AppSpacing.md),
+            ElevatedButton(
+              onPressed: onRetry,
+              child: Text(l10n.retry),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

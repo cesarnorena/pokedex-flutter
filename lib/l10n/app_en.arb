@@ -1,6 +1,9 @@
 {
   "app_title": "Pokedex",
 
+  "list_error_message": "Something went wrong loading Pokémon.",
+  "retry": "Retry",
+
   "hello": "Hello {userName}",
   "@hello": {
     "description": "A message with a single parameter",
